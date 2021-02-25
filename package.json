@@ -1,0 +1,28 @@
+{
+  "name": "terraform-codebuild-sandbox",
+  "version": "1.0.0",
+  "description": "Sandbox for terraform and codebuild",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewmacklin/terraform-codebuild-sandbox.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthewmacklin/terraform-codebuild-sandbox/issues"
+  },
+  "homepage": "https://github.com/matthewmacklin/terraform-codebuild-sandbox#readme",
+  "dependencies": {
+    "serverless-bundle": "^4.2.1",
+    "serverless-iam-roles-per-function": "^3.1.0",
+    "serverless-offline": "^6.8.0"
+  },
+  "devDependencies": {
+    "serverless-plugin-ifelse": "^1.0.7"
+  }
+}
