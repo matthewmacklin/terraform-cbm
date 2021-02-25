@@ -128,7 +128,7 @@ resource "aws_codebuild_project" "example-cbm" {
 
 
 data "aws_secretsmanager_secret_version" "creds" {
-  secret_id = "Codebuild_github_token"
+  secret_id = "CBM_GH_TOKEN"
 }
 
 locals {
