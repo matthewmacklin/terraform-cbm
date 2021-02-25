@@ -125,8 +125,20 @@ resource "aws_codebuild_project" "example-cbm" {
 }
 
 
+
+
+data "aws_secretsmanager_secret_version" "creds" {
+  secret_id = "Codebuild_github_token"
+}
+
+locals {
+  gh_credentials = jsondecode(
+    data.aws_secretsmanager_secret_version.creds.secret_string
+  )
+}
+
 resource "aws_codebuild_source_credential" "github_token" {
   auth_type   = "PERSONAL_ACCESS_TOKEN"
   server_type = "GITHUB"
-  token       = var.gh_access_token
+  token       = local.gh_credentials.cbm_gh_token
 }
