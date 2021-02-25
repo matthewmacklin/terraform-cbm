@@ -9,4 +9,4 @@ phases:
       - npm install
   build:
     commands:
-      - sls deploy --stage cbstage
+      - echo "hello from codebuild"
