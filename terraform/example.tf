@@ -67,16 +67,16 @@ resource "aws_codebuild_project" "example-cbm" {
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
 
-    environment_variable {
-      name  = "SOME_KEY1"
-      value = "SOME_VALUE1"
-    }
+    # environment_variable {
+    #   name  = "SOME_KEY1"
+    #   value = "SOME_VALUE1"
+    # }
 
-    environment_variable {
-      name  = "SOME_KEY2"
-      value = "SOME_VALUE2"
-      type  = "PARAMETER_STORE"
-    }
+    # environment_variable {
+    #   name  = "SOME_KEY2"
+    #   value = "SOME_VALUE2"
+    #   type  = "PARAMETER_STORE"
+    # }
   }
 
   logs_config {
@@ -128,5 +128,5 @@ resource "aws_codebuild_project" "example-cbm" {
 resource "aws_codebuild_source_credential" "github_token" {
   auth_type   = "PERSONAL_ACCESS_TOKEN"
   server_type = "GITHUB"
-  token       = variable.gh_access_token.GH_TOKEN
+  token       = var.gh_access_token
 }
