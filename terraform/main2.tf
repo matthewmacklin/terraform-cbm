@@ -2,17 +2,21 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-terraform {
-  backend "s3" {
-    bucket = "oa-sherpa-tfstate"
-    key    = "app-state"
-    region = "eu-west-2"
-    encrypt = true
-  }
+# terraform {
+#   backend "s3" {
+#     bucket = "cbm_2"
+#     key    = "app-state"
+#     region = "eu-west-2"
+#     encrypt = true
+#   }
+# }
+resource "aws_s3_bucket" "cbm-2" {
+  bucket = "cbm-2"
+  acl    = "private"
 }
 
 resource "aws_iam_role" "cbm_codebuild" {
-  name = "sherpa_codebuild"
+  name = "cbm-2"
 
   assume_role_policy = <<POLICY
 {
@@ -34,7 +38,7 @@ POLICY
 }
 
 resource "aws_iam_role_policy" "cbm_codebuild_policy" {
-  role = aws_iam_role.sherpa_codebuild.name
+  role = aws_iam_role.cbm_codebuild.name
 
   policy = <<POLICY
 {
@@ -99,11 +103,11 @@ resource "aws_codebuild_source_credential" "github_token" {
 }
 
 
-resource "aws_codebuild_project" "cbm-test" {
+resource "aws_codebuild_project" "cbm-2" {
   name          = "deploy-prod"
-  description   = "Runs tests for sherpa search and elasticsearch, and deploys to prod if they pass"
+  description   = "Just practicing codebuild integreation with terraform"
   build_timeout = "120"
-  service_role  = aws_iam_role.sherpa_codebuild.arn
+  service_role  = aws_iam_role.cbm_codebuild.arn
 
   artifacts {
     type = "NO_ARTIFACTS"
