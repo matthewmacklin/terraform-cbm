@@ -93,7 +93,7 @@ resource "aws_codebuild_project" "example-cbm" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/mitchellh/packer.git"
+    location        = "https://github.com/matthewmacklin/terraform-cbm"
     git_clone_depth = 1
 
     git_submodules_config {
