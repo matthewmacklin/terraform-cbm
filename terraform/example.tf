@@ -95,7 +95,7 @@ resource "aws_codebuild_project" "example-cbm" {
     type            = "GITHUB"
     location        = "https://github.com/matthewmacklin/terraform-cbm"
     git_clone_depth = 1
-    buildspec       = "./buildspec.yml"
+    buildspec       = "./codebuild/buildspec.yml"
 
 
     git_submodules_config {
