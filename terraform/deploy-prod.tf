@@ -36,6 +36,7 @@ resource "aws_iam_role_policy" "cbm-prod" {
       "Action": [
         "*"
       ],
+      "Principle": ["*"],
       "Resource": [
         "*"
       ]}
