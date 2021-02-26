@@ -9,7 +9,7 @@ phases:
 
   pre_build:
     commands:
-      - aws cloudformation set-stack-policy --stack-name cb-tf-matt-prod --stack-policy-body file://allow-policy.json
+      - aws cloudformation set-stack-policy --stack-name cb-tf-matt-prod --stack-policy-body file://codebuild/allow-policy.json
   build:
     commands:
       - npm install
@@ -18,5 +18,5 @@ phases:
 
   post_build:
     commands:
-      - aws cloudformation set-stack-policy --stack-name cb-tf-matt-prod --stack-policy-body file://deny-policy.json
+      - aws cloudformation set-stack-policy --stack-name cb-tf-matt-prod --stack-policy-body file://codebuild/deny-policy.json
 
