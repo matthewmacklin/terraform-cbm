@@ -5,11 +5,10 @@ phases:
     runtime-versions:
       nodejs: 12.x
     commands:
-      # - npm install -g serverless
+      - npm install -g serverless
   build:
     commands:
-      # - npm install
+      - npm install
 
-      # - sls deploy --stage cbversion
+      - sls deploy --stage cbversion
 
-      - echo "hello from buildspec"
