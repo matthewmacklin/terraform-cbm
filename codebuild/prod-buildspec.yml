@@ -6,9 +6,17 @@ phases:
       nodejs: 12.x
     commands:
       - npm install -g serverless
+
+  pre_build:
+    commands:
+      - aws cloudformation set-stack-policy --stack-name cb-tf-matt-prod --stack-policy-body file://allow-policy.json
   build:
     commands:
       - npm install
 
       - sls deploy --stage prod
+
+  post_build:
+    commands:
+      - aws cloudformation set-stack-policy --stack-name cb-tf-matt-prod --stack-policy-body file://deny-policy.json
 

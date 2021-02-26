@@ -5,7 +5,7 @@ export const main = async (event, context) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'Hello world!!! 11.54',
+        message: 'Hello world!!! testing 3.37',
       },
       null,
       2
