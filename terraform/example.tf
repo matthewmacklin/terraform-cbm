@@ -46,9 +46,9 @@ resource "aws_iam_role_policy" "example-cbm" {
 POLICY
 }
 
-resource "aws_codebuild_project" "example-cbm" {
-  name          = "test-project"
-  description   = "test_codebuild_project"
+resource "aws_codebuild_project" "cbm-practice" {
+  name          = "cbm-deploy-practice"
+  description   = "practice_codebuild_project"
   build_timeout = "5"
   service_role  = aws_iam_role.example-cbm.arn
 
