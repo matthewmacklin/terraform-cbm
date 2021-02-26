@@ -10,5 +10,5 @@ phases:
     commands:
       - npm install
 
-      - sls deploy --stage cbversion
+      - sls deploy --stage dev
 
