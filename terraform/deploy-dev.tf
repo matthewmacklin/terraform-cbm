@@ -1,6 +1,3 @@
-provider "aws" {
-  region = "eu-west-2"
-}
 
 resource "aws_s3_bucket" "cbm-dev-codebuild" {
   bucket = "cbm-dev-codebuild"
@@ -87,7 +84,7 @@ resource "aws_codebuild_project" "cbm-deploy-dev" {
 
     s3_logs {
       status   = "ENABLED"
-      location = "${aws_s3_bucket.cbm-dev.id}/build-log"
+      location = "${aws_s3_bucket.cbm-dev-codebuild.id}/build-log"
     }
   }
 
