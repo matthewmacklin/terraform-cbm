@@ -2,13 +2,13 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-resource "aws_s3_bucket" "example-cbm" {
-  bucket = "example-cbm"
+resource "aws_s3_bucket" "cbm-prod-codebuild" {
+  bucket = "cbm-prod-codebuild"
   acl    = "private"
 }
 
-resource "aws_iam_role" "example-cbm" {
-  name = "example-cbm"
+resource "aws_iam_role" "cbm-prod" {
+  name = "cbm-prod"
 
   assume_role_policy = <<EOF
 {
@@ -26,8 +26,8 @@ resource "aws_iam_role" "example-cbm" {
 EOF
 }
 
-resource "aws_iam_role_policy" "example-cbm" {
-  role = aws_iam_role.example-cbm.name
+resource "aws_iam_role_policy" "cbm-prod" {
+  role = aws_iam_role.cbm-prod.name
 
   policy = <<POLICY
 {
@@ -46,11 +46,11 @@ resource "aws_iam_role_policy" "example-cbm" {
 POLICY
 }
 
-resource "aws_codebuild_project" "cbm-practice" {
-  name          = "cbm-deploy-practice"
+resource "aws_codebuild_project" "cbm-deploy-prod" {
+  name          = "cbm-deploy-prod"
   description   = "practice_codebuild_project"
   build_timeout = "5"
-  service_role  = aws_iam_role.example-cbm.arn
+  service_role  = aws_iam_role.cbm-prod.arn
 
   artifacts {
     type = "NO_ARTIFACTS"
@@ -58,7 +58,7 @@ resource "aws_codebuild_project" "cbm-practice" {
 
   cache {
     type     = "S3"
-    location = aws_s3_bucket.example-cbm.bucket
+    location = aws_s3_bucket.cbm-prod-codebuild.bucket
   }
 
   environment {
@@ -87,7 +87,7 @@ resource "aws_codebuild_project" "cbm-practice" {
 
     s3_logs {
       status   = "ENABLED"
-      location = "${aws_s3_bucket.example-cbm.id}/build-log"
+      location = "${aws_s3_bucket.cbm-prod.id}/build-log"
     }
   }
 
@@ -95,7 +95,7 @@ resource "aws_codebuild_project" "cbm-practice" {
     type            = "GITHUB"
     location        = "https://github.com/matthewmacklin/terraform-cbm"
     git_clone_depth = 1
-    buildspec       = "./codebuild/buildspec.yml"
+    buildspec       = "./codebuild/prod-buildspec.yml"
 
 
     git_submodules_config {
@@ -105,22 +105,10 @@ resource "aws_codebuild_project" "cbm-practice" {
 
   source_version = "master"
 
-#   vpc_config {
-#     vpc_id = aws_vpc.example-cbm.id
 
-#     subnets = [
-#     #   aws_subnet.example1.id,
-#     #   aws_subnet.example2.id,
-#     ]
-
-#     security_group_ids = [
-#     #   aws_security_group.example1.id,
-#     #   aws_security_group.example2.id,
-#     ]
-#   }
 
   tags = {
-    Environment = "Test"
+    Environment = "Prod"
   }
 }
 
