@@ -15,7 +15,6 @@ plugins:
 provider:
   name: aws
   region: ${self:custom.region}
-  # stage: ${self:custom.stage}
   stage: ${opt:stage}
 
 
@@ -25,11 +24,6 @@ provider:
     # https://www.serverless.com/framework/docs/deprecations/#AWS_API_GATEWAY_NAME_STARTING_WITH_SERVICE
     shouldStartNameWithService: true
 
-  # stackPolicy:
-  #   - Effect: Deny
-  #     Action: "Update:*"
-  #     Principal: "*"
-  #     Resource: "*"
 
   stackPolicy:
     - Effect: ${self:custom.stackPolicyEffect.${self:provider.stage}, self:custom.stackPolicyEffect.default}
@@ -42,24 +36,7 @@ provider:
 custom:
   region: eu-west-2
 
-  # Get variables from the 'serverless.env.yml' file. You need to create this file - see the README.md.
-  # stage: ${file(./serverless.env.yml):stage}
-  # currentStage: ${file(./serverless.env.yml):stage}
-  # stage: ${file(./stage-config.yml):{${file(./serverless.env.yml):stage, opt:stage}}, '${file(./serverless.env.yml):stage}' }
-  # stage: ${file(./stage-config.yml).${opt:stage}, '${file(./serverless.env.yml):stage}' }
-
-  # stage: ${file(./stage-config.yml):${file(./serverless.env.yml):stage, opt:stage}, '${file(./serverless.env.yml):stage}' }
-
-  # stage: ${file(./stage-config.yml):${opt:stage, '${file(./serverless.env.yml):stage}' }, '${file(./serverless.env.yml):stage}' }
-
-  # stage: ${file(./serverless.env.yml):stage}
-
-  # awsAccountId: ${file(./serverless.env.yml):AWS_ACCOUNT_ID}
-
-  # stackPolicyEffect:
-  #   prod: Deny
-  #   uat: Deny
-  #   default: Allow
+  
   
   stackPolicyEffect:
     prod: Deny
@@ -70,21 +47,11 @@ custom:
   
 
 functions:
-  #
-  # TypeGraphQL / ES Search lambda
-  #
+ 
   hello-world:
     handler: handlers/hello.main
     events:
       - http:
           path: hello
           method: get
-     
-# # Outputs for E2E test framework (will appear in stack-output/stack.yml)
-# Outputs:
-#   DdbTableName:
-#     Value: ${self:custom.dynamoDbTable}
-#   ApiKeyGSIName:
-#     Value: ${self:custom.indexName}
-#   AWSRegion:
-#     Value: ${self:custom.region}
+ 
