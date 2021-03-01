@@ -54,7 +54,7 @@ custom:
 
   # stage: ${file(./serverless.env.yml):stage}
 
-  awsAccountId: ${file(./serverless.env.yml):AWS_ACCOUNT_ID}
+  # awsAccountId: ${file(./serverless.env.yml):AWS_ACCOUNT_ID}
 
   # stackPolicyEffect:
   #   prod: Deny
