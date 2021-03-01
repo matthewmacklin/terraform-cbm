@@ -1,7 +1,5 @@
-
-
 resource "aws_s3_bucket" "cbm-prod-codebuild" {
-  bucket = "cbm-prod-codebuild"
+  bucket = "cbm-prod-codebuild-2"
   acl    = "private"
 }
 
@@ -24,26 +22,54 @@ resource "aws_iam_role" "cbm-prod" {
 EOF
 }
 
-resource "aws_iam_role_policy" "cbm-prod" {
+resource "aws_iam_role_policy" "cbm_prod_policy" {
   role = aws_iam_role.cbm-prod.name
 
   policy = <<POLICY
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "*"
-      ],
-      "Principle": ["*"],
-      "Resource": [
-        "*"
-      ]}
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Resource": [
+              "*"
+            ],
+            "Action": [
+                "sns:*",
+                "ssm:*",
+                "kms:*",
+                "rds:*",
+                "s3:*",
+                "firehose:*",
+                "logs:*",
+                "cloudformation:*",
+                "elasticloadbalancing:*",
+                "autoscaling-plans:*",
+                "es:*",
+                "ecr:*",
+                "apigateway:*",
+                "dynamodb:*",
+                "lambda:*",
+                "events:*",
+                "sqs:*",
+                "autoscaling:*",
+                "iam:*",
+                "elasticbeanstalk:*",
+                "secretsmanager:*",
+                "route53:*",
+                "ec2:*",
+                "ram:*",
+                "kinesis:*",
+                "codebuild:*",
+                "cloudwatch:*",
+                "elasticfilesystem:*"
+            ]
+        }
+    ]
+  }
+  POLICY
 }
-POLICY
-}
+
 
 resource "aws_codebuild_project" "cbm-deploy-prod" {
   name          = "cbm-deploy-prod"
